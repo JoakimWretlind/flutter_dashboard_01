@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:overview_003/constants/styles.dart';
+import 'package:overview_003/layout/responsive.dart';
 import 'package:overview_003/pages/overview/components/recent_files.dart';
 import 'components/header.dart';
 import 'components/my_files.dart';
@@ -31,7 +32,11 @@ class OverviewPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: defaultPadding),
-                const Expanded(flex: 2, child: StorageDetails()),
+                if (!Responsive.isMobile(context))
+                  const Expanded(
+                    flex: 2,
+                    child: StorageDetails(),
+                  ),
               ],
             ),
           ],
