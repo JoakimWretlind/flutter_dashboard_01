@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:overview_003/components/side_menu.dart';
+import 'package:overview_003/controllers/menu_controller.dart';
 import 'package:overview_003/layout/responsive.dart';
 import 'package:overview_003/pages/overview/overview_page.dart';
+import 'package:provider/provider.dart';
 import '../constants/styles.dart';
 
 class MainScreen extends StatelessWidget {
@@ -10,6 +12,9 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // to handle drawer state
+      key: context.read<MenuController>().scaffoldKey,
+      drawer: const SideMenu(),
       backgroundColor: bgColor,
       body: SafeArea(
           child: Row(

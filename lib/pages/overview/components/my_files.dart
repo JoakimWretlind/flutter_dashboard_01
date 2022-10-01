@@ -25,8 +25,11 @@ class MyFiles extends StatelessWidget {
             ),
             ElevatedButton.icon(
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: defaultPadding * 1.5, vertical: defaultPadding),
+                padding: EdgeInsets.symmetric(
+                  horizontal: defaultPadding * 1.5,
+                  vertical:
+                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                ),
               ),
               onPressed: () {},
               icon: const Icon(Icons.add),
@@ -36,7 +39,9 @@ class MyFiles extends StatelessWidget {
         ),
         const SizedBox(height: defaultPadding),
         Responsive(
-          mobile: const FileInfoCardGridView(),
+          mobile: FileInfoCardGridView(
+              crossAxisCount: screenSize.width < 650 ? 2 : 4,
+              childAspectRatio: screenSize.width < 650 ? 1.3 : 1),
           tablet: const FileInfoCardGridView(),
           desktop: FileInfoCardGridView(
             childAspectRatio: screenSize.width < 1400 ? 1.1 : 1.4,
@@ -60,11 +65,13 @@ class FileInfoCardGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: demoMyFiles.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: defaultPadding,
+        mainAxisSpacing: defaultPadding,
         childAspectRatio: childAspectRatio,
       ),
       itemBuilder: (context, index) => FileInfoCard(
