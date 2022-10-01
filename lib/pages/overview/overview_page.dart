@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:overview_003/constants/styles.dart';
 import 'components/header.dart';
+import 'components/my_files.dart';
 import 'components/storage_details.dart';
 
 class OverviewPage extends StatelessWidget {
@@ -17,13 +18,13 @@ class OverviewPage extends StatelessWidget {
             const SizedBox(height: defaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Expanded(
                   flex: 5,
-                  child: Container(height: 500, color: Colors.white),
+                  child: MyFiles(),
                 ),
-                const SizedBox(width: defaultPadding),
-                const Expanded(flex: 2, child: StorageDetails()),
+                SizedBox(width: defaultPadding),
+                Expanded(flex: 2, child: StorageDetails()),
               ],
             ),
           ],
