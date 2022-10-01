@@ -24,14 +24,19 @@ class OverviewPage extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: Column(
-                    children: const [
-                      MyFiles(),
-                      SizedBox(height: defaultPadding),
-                      RecentFiles()
+                    children: [
+                      const MyFiles(),
+                      const SizedBox(height: defaultPadding),
+                      const RecentFiles(),
+                      if (Responsive.isMobile(context))
+                        const SizedBox(height: defaultPadding),
+                      if (Responsive.isMobile(context)) const StorageDetails(),
                     ],
                   ),
                 ),
-                const SizedBox(width: defaultPadding),
+                if (!Responsive.isMobile(context))
+                  const SizedBox(width: defaultPadding),
+                // On mobile means if the screen < 850 -> don't show
                 if (!Responsive.isMobile(context))
                   const Expanded(
                     flex: 2,
